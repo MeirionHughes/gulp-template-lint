@@ -21,7 +21,7 @@ module.exports = function (rules) {
             .lint(html)
             .then((errors) => {
                 errors.forEach((error) => {
-                    gutil.log('WARNING', error,
+                    gutil.log(`WARNING: ${error.message}, line: ${error.line}, column: ${error.column}`,
                         file.path.substring(file.cwd.length, file.path.Length));
                 });
             })
