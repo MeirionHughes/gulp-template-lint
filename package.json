@@ -6,7 +6,7 @@
     "url": "https://github.com/MeirionHughes/gulp-template-lint"
   },
   "license": "(Apache-2.0)",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "dependencies": {
     "event-stream": "^3.3.2",
     "gulp": "3.x",
