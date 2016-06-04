@@ -1,5 +1,11 @@
 # gulp-template-lint
-Wrap of template-lint as a simple gulp plugin
+![logo](https://d30y9cdsu7xlg0.cloudfront.net/png/30843-200.png)
+
+Wrap of [template-lint](https://github.com/MeirionHughes/template-lint) as a simple gulp plugin in order to sanity check html
+
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][npm-downloads]][npm-url]
+[![Travis Status][travis-image]][travis-url]
 
 ## install
 ```
@@ -9,6 +15,7 @@ npm install gulp-template-lint
 ## usage
 
 ```
+var gulp = require('gulp');
 var linter = require('gulp-template-lint');
 
 gulp.task('lint-template-html', function () {
@@ -19,34 +26,66 @@ gulp.task('lint-template-html', function () {
  
 ```
 
-## custom rules example
+## configure rules
 
-you can override the default set of rules by supplying an array of rules. You can also make your own
+you can override the default set of rules by supplying an array of rules.
 
 ```
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var parse5 = require('parse5');
-var stream = require('stream');
 var linter = require('gulp-template-lint');
 
-var ParserRule = require('template-lint').ParserRule;
+var SelfClose = require('template-lint').SelfCloseRule;
 
-class AltRule {
-    init(parser, state) {        
-        var self = this;
-        self.errors = [];
-        parser.on('startTag', (name, attrs, selfClosing, location) => {
-            if (name == 'foo' && state.scope == 'body' ) { 
-                let error = "boo!... [line: " + location.line + "]";
-                self.errors.push(error);                
-            }
-        });
-    }
-}
+var rules = [new SelfClose()];
 
 gulp.task('build-html', function () {
     return gulp.src('**/*.html')
-        .pipe(linter([new AltRule(), new ParserRule()]))
+        .pipe(linter(rules))
         .pipe(gulp.dest('output'));
 });
+```
+
+## adding obsolete tags and attributes
+
+the obsolete rules aren't part of the default rule-set; 
+you can add them in and define obsolete tags and attributes
+
+```
+var gulp = require('gulp');
+var linter = require('gulp-template-lint');
+
+var ObsoleteTagRule = require('template-lint').ObsoleteTagRule;
+var ObsoleteAttributeRule = require('template-lint').ObsoleteAttributeRule;
+
+var obsoleteTags = ['my-old-tag'];
+var obsoleteAttributes = [
+    {name:'myattribute'}, 
+    {name:'moo', tag:'my-old-tag'}];
+
+var rules = [
+    new ObsoleteTagRule(obsoleteTags), 
+    new ObsoleteAttributeRule(obsoleteTags)
+];
+
+gulp.task('build-html', function () {
+    return gulp.src('**/*.html')
+        .pipe(linter(rules))
+        .pipe(gulp.dest('output'));
+});
+```
+
+`my-old-tag` is obsolete, `myattribute` is obsolete and 
+`moo` attribute is obsolete but only on the `my-old-tag` tag
+
+##Icon
+
+Icon courtesy of [The Noun Project](https://thenounproject.com/)
+
+[npm-url]: https://npmjs.org/package/gulp-aurelia-template-lint
+[npm-image]: http://img.shields.io/npm/v/gulp-aurelia-template-lint.svg
+
+[npm-url]: https://npmjs.org/package/gulp-aurelia-template-lint
+[npm-image]: http://img.shields.io/npm/v/gulp-aurelia-template-lint.svg
+[npm-downloads]: http://img.shields.io/npm/dm/gulp-aurelia-template-lint.svg
+[travis-url]: https://travis-ci.org/MeirionHughes/gulp-aurelia-template-lint
+[travis-image]: https://img.shields.io/travis/MeirionHughes/gulp-aurelia-template-lint/master.svg
