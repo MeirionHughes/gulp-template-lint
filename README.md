@@ -81,11 +81,11 @@ gulp.task('build-html', function () {
 
 Icon courtesy of [The Noun Project](https://thenounproject.com/)
 
-[npm-url]: https://npmjs.org/package/gulp-aurelia-template-lint
-[npm-image]: http://img.shields.io/npm/v/gulp-aurelia-template-lint.svg
+[npm-url]: https://npmjs.org/package/gulp-template-lint
+[npm-image]: http://img.shields.io/npm/v/gulp-template-lint.svg
 
-[npm-url]: https://npmjs.org/package/gulp-aurelia-template-lint
-[npm-image]: http://img.shields.io/npm/v/gulp-aurelia-template-lint.svg
-[npm-downloads]: http://img.shields.io/npm/dm/gulp-aurelia-template-lint.svg
-[travis-url]: https://travis-ci.org/MeirionHughes/gulp-aurelia-template-lint
-[travis-image]: https://img.shields.io/travis/MeirionHughes/gulp-aurelia-template-lint/master.svg
+[npm-url]: https://npmjs.org/package/gulp-template-lint
+[npm-image]: http://img.shields.io/npm/v/gulp-template-lint.svg
+[npm-downloads]: http://img.shields.io/npm/dm/gulp-template-lint.svg
+[travis-url]: https://travis-ci.org/MeirionHughes/gulp-template-lint
+[travis-image]: https://img.shields.io/travis/MeirionHughes/gulp-template-lint/master.svg
