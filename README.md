@@ -54,15 +54,23 @@ you can add them in and define obsolete tags and attributes
 var gulp = require('gulp');
 var linter = require('gulp-template-lint');
 
+var SelfClose = require('template-lint').SelfCloseRule;
+var ParserRule = require('template-lint').ParserRule;
 var ObsoleteTagRule = require('template-lint').ObsoleteTagRule;
 var ObsoleteAttributeRule = require('template-lint').ObsoleteAttributeRule;
 
-var obsoleteTags = ['my-old-tag'];
+var obsoleteTags = [
+    {tag:'my-old-tag', msg:'its really old....'}
+];
 var obsoleteAttributes = [
-    {name:'myattribute'}, 
-    {name:'moo', tag:'my-old-tag'}];
+    {attr:'myattribute'}, 
+    {attr:'moo', tag:'my-old-tag'}, //obsolete only when on for my-old-tag 
+    {attr:'fubar', msg:'uh uh... '}
+];
 
 var rules = [
+    new SelfClose(),
+    new ParserRule(),
     new ObsoleteTagRule(obsoleteTags), 
     new ObsoleteAttributeRule(obsoleteTags)
 ];
@@ -73,9 +81,6 @@ gulp.task('build-html', function () {
         .pipe(gulp.dest('output'));
 });
 ```
-
-`my-old-tag` is obsolete, `myattribute` is obsolete and 
-`moo` attribute is obsolete but only on the `my-old-tag` tag
 
 ##Icon
 
