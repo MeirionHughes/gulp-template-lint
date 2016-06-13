@@ -72,7 +72,7 @@ var rules = [
     new SelfClose(),
     new ParserRule(),
     new ObsoleteTagRule(obsoleteTags), 
-    new ObsoleteAttributeRule(obsoleteTags)
+    new ObsoleteAttributeRule(obsoleteAttributes)
 ];
 
 gulp.task('build-html', function () {
