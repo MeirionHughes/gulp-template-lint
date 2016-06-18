@@ -11,7 +11,7 @@ module.exports = function(rules, reporter) {
         rules = defaultRules;
             
     if(!reporter)
-        reporter = (error, file)=>{
+        reporter = (error, file)=>{            
              gutil.log(`WARNING: ${error.message} Ln ${error.line} Col ${error.column}`, file);
         }
           
@@ -26,7 +26,7 @@ module.exports = function(rules, reporter) {
             return;
         }   
          
-        var pathshort = "";
+        var pathshort = undefined;
           
         if(file.path !=null && file.cwd != null)  
             pathshort = file.path.substring(file.cwd.length, file.path.Length);
@@ -35,7 +35,7 @@ module.exports = function(rules, reporter) {
         var self = this;
         
         linter
-            .lint(html)        
+            .lint(html, pathshort)        
             .then((errors) => {           
                 errors.forEach((error) => {reporter(error,pathshort)});
             })
